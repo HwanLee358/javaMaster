@@ -11,7 +11,7 @@ public class EmpManager {
 		boolean run = true;
 		EmpDAO dao = new EmpDAO();
 		while(run) {
-			System.out.println("1.사원목록 2.사원등록 3.정보수정 4.사원삭제 5.종료");
+			System.out.println("1.사원목록 2.사원등록 3.정보수정 4.사원삭제 5.사원선택 6.종료");
 			System.out.print("선택> ");
 			int menu = Integer.parseInt(scn.nextLine());
 			
@@ -79,7 +79,9 @@ public class EmpManager {
 				};
 				break;
 			case 5:
-				
+				System.out.print("선택할 사원번호>> ");
+				eno = scn.nextLine();
+				System.out.println( dao.showEnp(Integer.parseInt(eno)));
 				break;
 			case 6:
 				run = false;

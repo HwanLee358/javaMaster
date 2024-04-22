@@ -1,7 +1,5 @@
 package co.yedam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ public class SwimEmpManager {
 		boolean run = true;
 		SwimEmpDAO dao = new SwimEmpDAO(); 
 		while(run) {
-			System.out.println("1.회원목록 2.회원등록 3.정보수정 4.정보삭제 5.종료");
+			System.out.println("1.회원목록 2.회원등록 3.정보수정 4.정보삭제 5.회원선택 6.종료");
 			System.out.print("선택> ");
 			int Menu = Integer.parseInt(sc.nextLine());
 			switch(Menu) {
@@ -70,6 +68,11 @@ public class SwimEmpManager {
 				}
 				break;
 			case 5:
+				System.out.print("선택할 사원번호>> ");
+				empNo = Integer.parseInt(sc.nextLine());
+				System.out.println( dao.showEnp(empNo));
+				break;
+			case 6:
 				sc.close();
 				run = false;
 				break;

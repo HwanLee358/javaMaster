@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EmpDAO {
@@ -121,6 +123,36 @@ public class EmpDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public String showEnp(int eno) {
+		getConn();
+		String str = "";
+		String sql = "select * from emp "
+				   + "where emp_no =? "
+				   + "order by emp_no";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, eno);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
+				Date date = format.parse(rs.getString("hire_date"));
+				String date_str = format.format(date);
+				
+				str = "사원번호 : "+ rs.getInt("emp_no");
+				str+= "\t\t이름 : " + rs.getString("emp_name");
+				str+= "\n입사일 : "+ date_str;
+				str+= "\t\t월급 : "+ rs.getInt("salary");
+				str+= "\n이메일 : "+ rs.getString("email");
+				str+= "\t전화번호 : "+ rs.getString("emp_phone");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
 	}
 	
 }
