@@ -6,10 +6,8 @@ public class HamManager {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
-		//1. 메뉴 관리
 		HamBurGerMenu menudao = new HamBurGerMenu();
-		//2. 가게 관리
-		
+		HamBurGerOrder orderdao = new HamBurGerOrder();
 		while(run) {
 			System.out.println("		              햄버거 가게                                        ");
 			System.out.println("-----------------------------------------------------------------------");
@@ -23,6 +21,7 @@ public class HamManager {
 				menudao.BurGerMenu();
 				break;
 			case 2:
+				orderdao.BurGerOrder();
 				break;
 			case 3:
 				break;
