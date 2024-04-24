@@ -2,12 +2,13 @@ package co.ham;
 
 import java.util.Scanner;
 
-public class HamManager {
+public class HamBurgerMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
 		HamBurGerMenu menudao = new HamBurGerMenu();
 		HamBurGerOrder orderdao = new HamBurGerOrder();
+		HamBurGerlogin logindao = new HamBurGerlogin();
 		while(run) {
 			System.out.println("		              햄버거 가게                                        ");
 			System.out.println("-----------------------------------------------------------------------");
@@ -21,7 +22,8 @@ public class HamManager {
 				menudao.BurGerMenu();
 				break;
 			case 2:
-				orderdao.BurGerOrder();
+				logindao.HamBurGerloginform();
+				orderdao.HamBurGerOrderform(logindao.name);
 				break;
 			case 3:
 				break;
