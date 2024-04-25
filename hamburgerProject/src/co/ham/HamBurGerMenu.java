@@ -76,6 +76,9 @@ public class HamBurGerMenu {
 			case 3:
 				System.out.print("메뉴 수정할 햄버거 > ");
 				name = sc.nextLine();
+//				System.out.println("-----------------------------------------------------------------------");
+//				System.out.println("1.이름 2.");
+//				System.out.println("-----------------------------------------------------------------------");
 				System.out.print("가격 > ");
 				price = Integer.parseInt(sc.nextLine());
 				

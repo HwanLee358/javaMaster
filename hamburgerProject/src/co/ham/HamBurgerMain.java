@@ -8,27 +8,29 @@ public class HamBurgerMain {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		boolean run = true;
-		HamBurGerMenu menudao = new HamBurGerMenu();
-		HamBurGerOrder orderdao = new HamBurGerOrder();
-		HamBurGerlogin logindao = new HamBurGerlogin();
+		HamBurGerMenu menu = new HamBurGerMenu();
+		HamBurGerOrder order = new HamBurGerOrder();
+		HamBurGerlogin login = new HamBurGerlogin();
+		HamBurGerSalesUI sales = new HamBurGerSalesUI();  
 		while(run) {
 			System.out.println("		              햄버거 가게                                        ");
 			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("1.메뉴 관리     /     2.가게 관리     /    3. 매출관리     /     4.종료하기");
+			System.out.println("1.메뉴 관리     /     2.가게 관리     /    3. 매출현황     /     4.종료하기");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.print("선택할 번호 > ");
 			int num = Integer.parseInt(sc.nextLine());
 			
 			switch(num){
 			case 1:
-				menudao.BurGerMenu();
+				menu.BurGerMenu();
 				break;
 			case 2:
-				logindao.HamBurGerloginform();
-				name_id = logindao.name;
-				orderdao.HamBurGerOrderform(logindao.name);
+				login.HamBurGerloginform();
+				name_id = login.name;
+				order.HamBurGerOrderform(login.name);
 				break;
 			case 3:
+				sales.HamBurGurSale();
 				break;
 			case 4:
 				sc.close();
