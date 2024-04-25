@@ -36,7 +36,7 @@ public class HamBurGerorderdetails {
 	
 	@Override
 	public String toString() {
-		return String.format("\t%s %25d\t %18d", ham_name, ham_count, ham_price);
+		return String.format("\t%-25s\t%d\t\t\t%d", ham_name, ham_count, ham_price);
 	}
 	
 }

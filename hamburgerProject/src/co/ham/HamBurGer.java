@@ -47,6 +47,6 @@ public class HamBurGer {
 	
 	@Override
 	public String toString() {
-		return String.format("%d\t %s\t %3d\t\t %s\t %d원",ham_No,ham_Name,ham_Kcal,ham_Hire_Date,ham_Price);
+		return String.format("%-6d%-10s\t%d(kcal)\t %s\t %d원",ham_No,ham_Name,ham_Kcal,ham_Hire_Date,ham_Price);
 	}
 }

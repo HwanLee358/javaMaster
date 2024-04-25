@@ -30,14 +30,41 @@ public class HamBurGerDAO {
 		}
 	}// end connect
 	
+	// 0. 메뉴 용량
+	int MenuListsize() {
+		getConn();
+		int size = 0;
+		String sql = "select count(ham_no) from hamburger";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				size = rs.getInt("count(ham_no)");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(Exception e) {}
+			if(conn != null) try {conn.close();} catch(Exception e) {}
+			if( psmt != null) try { psmt.close();} catch(Exception e) {}
+		}
+		return size;
+	}
 	// 1. 햄버거 전체적 메뉴를 보여줌.
-	List <HamBurGer> hamburgerList(){
+	List <HamBurGer> hamburgerList(int page){
 		getConn();
 		List<HamBurGer> list = new ArrayList<>();
 		String sql = "select ham_no, ham_name, ham_kcal, ham_hire_date, ham_price "
-				   + "from hamburger order by ham_no";
+				   + "from( select rownum as  ham_no, ham_name, ham_kcal, ham_hire_date, ham_price "
+			             + "from hamburger where rownum <=?) "
+			       + "where ham_no >?";
+		int max = page*5;
+		int min = max-5;
 		try {
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, max);
+			psmt.setInt(2, min);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd");
@@ -55,6 +82,10 @@ public class HamBurGerDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(Exception e) {}
+			if(conn != null) try {conn.close();} catch(Exception e) {}
+			if( psmt != null) try { psmt.close();} catch(Exception e) {}
 		}
 		return list;
 	}
@@ -77,6 +108,10 @@ public class HamBurGerDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(Exception e) {}
+			if(conn != null) try {conn.close();} catch(Exception e) {}
+			if( psmt != null) try { psmt.close();} catch(Exception e) {}
 		}
 		return false;
 	}
@@ -97,6 +132,10 @@ public class HamBurGerDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(Exception e) {}
+			if(conn != null) try {conn.close();} catch(Exception e) {}
+			if( psmt != null) try { psmt.close();} catch(Exception e) {}
 		}
 		return false;
 	}
@@ -144,6 +183,10 @@ public class HamBurGerDAO {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();} catch(Exception e) {}
+			if(conn != null) try {conn.close();} catch(Exception e) {}
+			if( psmt != null) try { psmt.close();} catch(Exception e) {}
 		}
 		return showBurGer;
 	}

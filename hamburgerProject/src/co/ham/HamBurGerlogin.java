@@ -12,7 +12,7 @@ public class HamBurGerlogin {
 		while (run) {
 			System.out.println("		              햄버거 가게                                        ");
 			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("1. 로그인 			2. 회원가입 		3. 뒤로가기");
+			System.out.println("1.회원 		2.회원가입 		3.비회원 		4.뒤로가기");
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.print("선택 > ");
 			int num = Integer.parseInt(sc.nextLine());
@@ -50,9 +50,13 @@ public class HamBurGerlogin {
 				System.out.println(dao.signup(sighup));
 				break;
 			case 3:
+				name = "Non-members";
+				run = false;
+				break;
+			case 4:
+				run = false;
 				break;
 			}
-
 		}
 	}
 }
