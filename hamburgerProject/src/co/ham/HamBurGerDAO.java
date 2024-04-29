@@ -19,7 +19,7 @@ public class HamBurGerDAO {
 	// Constructor
 	// method
 	private void getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.8:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, "jsp", "jsp");
@@ -118,12 +118,44 @@ public class HamBurGerDAO {
 	// 3. 햄버거 메뉴 수정
 	boolean updateHamBurGer(HamBurGer hgr) {
 		getConn();
-		String sql = "update hamburger "
-				   + "set    ham_price = ? "
-				   + "where  ham_name = ?";
+		String sql = "update hamburger ";
+		switch(hgr.getHam_type()) {
+		case 1:
+			sql+= "set ham_name = ? ";
+			break;
+		case 2:
+			sql+= "set ham_price = ? ";
+			break;
+		case 3:
+			sql+= "set ham_kcal = ? ";
+			break;
+		case 4:
+			sql+= "set ham_hire_date = ? ";
+			break;
+		case 5:
+			sql+= "set ham_stuff = ? ";
+			break;
+		}		
+			   sql+= "where  ham_name = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, hgr.getHam_Price());
+			switch(hgr.getHam_type()) {
+			case 1:
+				psmt.setString(1, hgr.getHam_Name_modify());
+				break;
+			case 2:
+				psmt.setInt(1, hgr.getHam_Price());
+				break;
+			case 3:
+				psmt.setInt(1, hgr.getHam_Kcal());
+				break;
+			case 4:
+				psmt.setString(1, hgr.getHam_Hire_Date());
+				break;
+			case 5:
+				psmt.setString(1, hgr.getHam_Stuff());
+				break;
+			}
 			psmt.setString(2, hgr.getHam_Name());
 			int r = psmt.executeUpdate();
 			if(r > 0) {

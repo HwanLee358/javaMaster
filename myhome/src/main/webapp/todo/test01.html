@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 400px;
+      height: 380px;
+      background-color: yellow;
+    }
+
+    span {
+      display: inline-block;
+      width: 85px;
+      height: 30px;
+      padding: 2px;
+      margin: 2px;
+      background-color: cyan;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="keyword">
+  <button id="findBtn">찾기</button>
+  <div id="show">
+    <span>Lorem</span>
+    <span>ipsum</span>
+    <span>dolor</span>
+    <span>sit</span>
+    <span>amet</span>
+    <span>consectetur</span>
+    <span>adipisicing</span>
+    <span>elit.</span>
+    <span>Accusantium</span>
+    <span>dolores</span>
+    <span>reprehende</span>
+    <span>eius</span>
+    <span>distinctio,</span>
+    <span>molestiae</span>
+    <span>ratione</span>
+    <span>culpa</span>
+    <span>laborum</span>
+    <span>quia</span>
+    <span>odio</span>
+    <span>deleniti</span>
+    <span>non</span>
+    <span>aliquam</span>
+    <span>modi</span>
+    <span>nostrum</span>
+    <span>quas!</span>
+    <span>Ab</span>
+    <span>atque</span>
+    <span>ullam</span>
+    <span>in</span>
+    <span>dolorum.</span>
+  </div>
+  	<p id="remainCount"></p>
+  <script>
+    // findBtn의 클릭이벤트를 생성.
+    document.getElementById('findBtn').addEventListener('click', function(e){
+    	// input태그의 값을 확인.
+		let key = document.querySelector('#keyword').value;
+    	// span 요소 모두를 가져온다.
+		let allspan = document.querySelectorAll('span');
+    	// input값과  span의 값을 비교한다. 같으면 remove힌다.
+    	allspan.forEach(function (e){
+    		if(key == e.innerText){
+    			e.remove();
+    		}
+    		
+    	});
+    	// 입력값을 지워준다.
+    	document.querySelector('#keyword').value = "";
+    	console.log(allspan.length, sec);
+    	if(allspan.length == 0 && sec > 0){
+    		console.log("성공");
+    	}
+    })
+    let sec = 100;
+    setInterval(function(){
+    	sec--;
+    	document.querySelector('#remainCount').innerText = sec + "초";    	
+    	if(sec == 0){
+    		console.log("실패");
+    	}
+    },1000);
+  </script>
+</body>
+
+</html>

@@ -6,12 +6,20 @@ import java.util.Scanner;
 public class HamBurGerMenu {
 	//filed
 	
-	
 	//method
 	public void BurGerMenu() {
 		boolean run = true;
 		Scanner sc = new Scanner(System.in);
 		HamBurGerDAO dao = new HamBurGerDAO();
+		HamBurGerOrderDAO orderdao = new HamBurGerOrderDAO();
+		
+		String ham_name = "";
+		int kcal = 0;
+		int price = 0;
+		String ham_date = "";
+		String ham_stuff = "";
+		
+		HamBurGer bgr;
 		while(run) {
 			System.out.println("		              햄버거 가게                                        ");
 			System.out.println("-----------------------------------------------------------------------");
@@ -26,6 +34,7 @@ public class HamBurGerMenu {
 				while(rum2) {
 					int pageSize = dao.MenuListsize();
 					List<HamBurGer> lists = dao.hamburgerList(page);
+					int Currentpage = page;
 					System.out.println("		              햄버거 가게                                        ");
 					System.out.println("-----------------------------------------------------------------------");
 					System.out.println("	햄버거 이름 	칼로리		출시 날짜		가격");
@@ -34,11 +43,16 @@ public class HamBurGerMenu {
 						System.out.println(hbg.toString());
 					}
 					System.out.println("-----------------------------------------------------------------------");
+					
 					if(pageSize%5 != 0) {
 						page = pageSize/5 + 1;
 					}
 					for(int i=1; i<=page; i++) {
-						System.out.printf("[%d] ", i);
+						if(Currentpage == i) {
+							System.out.printf("%d ", i);														
+						}else {
+							System.out.printf("[%d] ", i);							
+						}
 					}
 					System.out.println();
 					System.out.print("페이지 > ");
@@ -51,54 +65,97 @@ public class HamBurGerMenu {
 			case 2:
 				System.out.print("햄버거 이름 > ");
 				String name = sc.nextLine();
-				System.out.print("칼로리 > ");
-				int kcal = Integer.parseInt(sc.nextLine());
-				System.out.print("출시날짜 > ");
-				String hire_date = sc.nextLine();
-				System.out.print("가격 > ");
-				int price = Integer.parseInt(sc.nextLine());
-				System.out.print("재료 > ");
-				String studff = sc.nextLine();
-				HamBurGer bgr = new HamBurGer();
-				
-				bgr.setHam_Name(name);
-				bgr.setHam_Kcal(kcal);
-				bgr.setHam_Hire_Date(hire_date);
-				bgr.setHam_Price(price);
-				bgr.setHam_Stuff(studff);
-				
-				if(dao.inserthamburger(bgr)) {
-					System.out.println("햄버거 추가 성공!");
-				}else{
-					System.out.println("햄버거 추가 실패...");
-				};
+				HamBurGerorderdetails order = new HamBurGerorderdetails();
+				order.setHam_name(name);
+
+				if (orderdao.HBGmenucheck(order).equals(name)) {
+					System.out.println("이미 존재하는 버거입니다");
+				}else {
+					System.out.print("칼로리 > ");
+					kcal = Integer.parseInt(sc.nextLine());
+					System.out.print("출시날짜 > ");
+					String hire_date = sc.nextLine();
+					System.out.print("가격 > ");
+					price = Integer.parseInt(sc.nextLine());
+					System.out.print("재료 > ");
+					String studff = sc.nextLine();
+					bgr = new HamBurGer();
+					
+					bgr.setHam_Name(name);
+					bgr.setHam_Kcal(kcal);
+					bgr.setHam_Hire_Date(hire_date);
+					bgr.setHam_Price(price);
+					bgr.setHam_Stuff(studff);
+					
+					if(dao.inserthamburger(bgr)) {
+						System.out.println("햄버거 추가 성공!");
+					}else{
+						System.out.println("햄버거 추가 실패...");
+					};
+				}
 				break;
 			case 3:
 				System.out.print("메뉴 수정할 햄버거 > ");
 				name = sc.nextLine();
-//				System.out.println("-----------------------------------------------------------------------");
-//				System.out.println("1.이름 2.");
-//				System.out.println("-----------------------------------------------------------------------");
-				System.out.print("가격 > ");
-				price = Integer.parseInt(sc.nextLine());
-				
-				bgr = new HamBurGer();
-				bgr.setHam_Name(name);
-				bgr.setHam_Price(price);
-				
-				if(dao.updateHamBurGer(bgr)) {
-					System.out.println("햄버거 메뉴 수정 성공!");
-				}else{
-					System.out.println("햄버거 메뉴 수정 실패...");
-				};
+				order = new HamBurGerorderdetails();
+				order.setHam_name(name);
+				if (orderdao.HBGmenucheck(order).equals(name)) {
+					System.out.println("1.햄버거명 2.가격 3.칼로리 4.날짜 5.재료");
+					System.out.print("선택 > ");
+					int menu_up = Integer.parseInt(sc.nextLine());
+					bgr = new HamBurGer();
+					switch(menu_up) {
+					case 1:
+						System.out.print("햄버거명 > ");
+						ham_name = sc.nextLine();
+						bgr.setHam_Name_modify(ham_name);
+						bgr.setHam_type(1);
+						break;
+					case 2:
+						System.out.print("가격 > ");
+						price = Integer.parseInt(sc.nextLine());
+						bgr.setHam_Price(price);
+						bgr.setHam_type(2);
+						break;
+					case 3:
+						System.out.print("칼로리 >");
+						kcal = Integer.parseInt(sc.nextLine());
+						bgr.setHam_Kcal(kcal);
+						bgr.setHam_type(3);
+						break;
+					case 4:
+						System.out.print("날짜 > ");
+						ham_date = sc.nextLine();
+						bgr.setHam_Hire_Date(ham_date);
+						bgr.setHam_type(4);
+						break;
+					case 5:
+						System.out.print("재료 > ");
+						ham_stuff = sc.nextLine();
+						bgr.setHam_Stuff(ham_stuff);
+						bgr.setHam_type(5);
+						break;
+					}
+					bgr.setHam_Name(name);
+					
+					if(dao.updateHamBurGer(bgr)) {
+						System.out.println("햄버거 메뉴 수정 성공!");
+					}else{
+						System.out.println("햄버거 메뉴 수정 실패...");
+					};
+				}else {					
+					System.out.println("메뉴에 없는 버거입니다");
+				}
 				break;
 			case 4:
 				System.out.print("메뉴 삭제할 햄버거 > ");
 				name = sc.nextLine();
+				order = new HamBurGerorderdetails();
+				order.setHam_name(name);
 				if(dao.deleteHamBurGer(name)) {
 					System.out.println("햄버거 메뉴 삭제 성공!");
 				}else {
-					System.out.println("햄버거 메뉴 삭제 실패...");
+					System.out.println("메뉴에 없는 버거 입니다");
 				}
 				break;
 			case 5:

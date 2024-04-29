@@ -54,6 +54,7 @@ public class HamBurGerlogin {
 				run = false;
 				break;
 			case 4:
+				name = "";
 				run = false;
 				break;
 			}

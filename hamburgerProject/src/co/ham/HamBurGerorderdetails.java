@@ -54,7 +54,7 @@ public class HamBurGerorderdetails {
 	}
 	
 	public String orderString() {
-		return String.format("%-5d%-10s\t%d\t%-5d\t%s\t%s", ham_order_no, ham_name, ham_count, ham_price, orderer_id, order_date);
+		return String.format("%-5d%-10s\t%d\t%-5d\t%-10s\t%s", ham_order_no, ham_name, ham_count, ham_price, orderer_id, order_date);
 	}
 	
 }

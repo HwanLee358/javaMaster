@@ -3,7 +3,7 @@ package co.ham;
 import java.util.Scanner;
 
 public class HamBurgerMain {
-	private static String name_id;
+	private static String name;
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -26,7 +26,9 @@ public class HamBurgerMain {
 				break;
 			case 2:
 				login.HamBurGerloginform();
-				name_id = login.name;
+				if(login.name.equals("")){
+					break;
+				};
 				order.HamBurGerOrderform(login.name);
 				break;
 			case 3:

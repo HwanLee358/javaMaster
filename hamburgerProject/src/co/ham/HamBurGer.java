@@ -8,6 +8,24 @@ public class HamBurGer {
 	private int ham_Price;
 	private String ham_Stuff;
 	
+	private int ham_type;
+	private String ham_Name_modify;
+	
+	public String getHam_Name_modify() {
+		return ham_Name_modify;
+	}
+	public void setHam_Name_modify(String ham_Name_modify) {
+		this.ham_Name_modify = ham_Name_modify;
+	}
+	
+	public int getHam_type() {
+		return ham_type;
+	}
+	public void setHam_type(int ham_type) {
+		this.ham_type = ham_type;
+	}
+
+	
 	public int getHam_No() {
 		return ham_No;
 	}
@@ -47,6 +65,7 @@ public class HamBurGer {
 	
 	@Override
 	public String toString() {
+		
 		return String.format("%-6d%-10s\t%d(kcal)\t %s\t %d원",ham_No,ham_Name,ham_Kcal,ham_Hire_Date,ham_Price);
 	}
 }

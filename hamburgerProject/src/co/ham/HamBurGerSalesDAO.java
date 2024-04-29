@@ -21,7 +21,7 @@ public class HamBurGerSalesDAO {
 
 	// method
 	private void getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.8:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, "jsp", "jsp");
@@ -40,7 +40,7 @@ public class HamBurGerSalesDAO {
 				+ "from orderdetails " + "where order_state = 'complete' ";
 		if (str.equals("")) {
 		} else {
-			sql += "and (ham_name = ? or order_name_id = ?)";
+			sql += "and (ham_name like '%' || ? || '%' or order_name_id like '%' || ? || '%')";
 		}
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -84,13 +84,15 @@ public class HamBurGerSalesDAO {
 	}
 
 	// 매출 합계
-	int HBGordersum(String str) {
+	int[] HBGordersum(String str) {
 		getConn();
-		int result = 0;
-		String sql = "select sum(ham_price) " + "from orderdetails " + "where order_state = 'complete'";
+		int[] result = {0, 0};
+		String sql = "select sum(ham_price), sum(ham_count) " 
+		           + "from orderdetails " 
+				   + "where order_state = 'complete'";
 		if (str.equals("")) {
 		} else {
-			sql += "and (ham_name = ? or order_name_id = ?)";
+			sql += "and (ham_name like '%' || ? || '%' or order_name_id like '%' || ? || '%')";
 		}
 
 		try {
@@ -102,8 +104,9 @@ public class HamBurGerSalesDAO {
 			}
 			rs = psmt.executeQuery();
 			while (rs.next()) {
-				result = rs.getInt("sum(ham_price)");
-			}
+				result[0] = rs.getInt("sum(ham_count)");
+				result[1] = rs.getInt("sum(ham_price)");
+ 			}
 			return result;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
