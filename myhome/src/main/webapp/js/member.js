@@ -18,6 +18,7 @@ function addMemberFnc() {
 function makeRow(member = { memNo, memName, memPnt }) {
 	// tr 생성
 	let tr = document.createElement('tr');
+	let inSert = document.querySelector('#insertMember');
 	//tr에 click이벤트 등록.
 	tr.addEventListener('click',function(e){
 		// tr(this)의 자식요소
@@ -25,6 +26,12 @@ function makeRow(member = { memNo, memName, memPnt }) {
 		document.querySelector('#memberNo').value = tr.children[0].innerHTML;
 		document.querySelector('#memberName').value = tr.children[1].innerHTML;
 		document.querySelector('#memberPoint').value = tr.children[2].innerHTML;
+		
+		inSert.onclick = () => {
+			tr.children[0].innerHTML = document.querySelector('#memberNo').value;	
+			tr.children[1].innerHTML = document.querySelector('#memberName').value;
+			tr.children[2].innerHTML = document.querySelector('#memberPoint').value;
+		};
 	}, true); 
 	for (let prop in member) {
 		let td = document.createElement('td');
