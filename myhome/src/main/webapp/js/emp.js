@@ -54,9 +54,10 @@ function addRow(){
 	let ehire = document.querySelector('#ehire').value;
 	let email = document.querySelector('#email').value;
 	
-	let param = `../empsave.json?job=add&name=${ename}&phone=${ephone}&salary=${esalary}&hire=${ehire}&email=${email}`;
-	addHtp.open('get', param);
-	addHtp.send();
+	let param = `job=add&name=${ename}&phone=${ephone}&salary=${esalary}&hire=${ehire}&email=${email}`;
+	addHtp.open('post', `../empsave.json`);
+	addHtp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	addHtp.send(param);
 	addHtp.onload = function(){
 		let result = JSON.parse(addHtp.responseText);
 		console.log(result);
@@ -99,11 +100,6 @@ function updateRow(){
 		console.log(result);
 		if(result.retCode == 'OK'){
 			let newTr = makeRow(result.retVal);
-			oldTr.querySelector('td:nth-of-type(3)').innerHTML = `<td>${email}</td>`
-			oldTr.querySelector('td:nth-of-type(4)').innerHTML = `<td>${salary}</td>`
-			oldTr.querySelector('button').innerText = '삭제';
-			oldTr.querySelector('button').addEventListener('click', deleteRow);
-			
 			oldTr.parentElement.replaceChild(newTr, oldTr);
 		}
 	}

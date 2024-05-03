@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 1px solid #ddd;
+}
+
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+	border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+
+.pagination a:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+</style>
+</head>
+<body>
+	<!-- myinfo/dataportal.html -->
+	<div id="show">
+		<table border="2">
+			<tbody id="list"></tbody>
+		</table>
+	</div>
+	
+	<div class="pagination">
+		<a href="#">&laquo;</a> 
+		<a class="active" href="#">1</a> 
+		<a href="#">2</a>
+		<a href="#">3</a> 
+		<a href="#">4</a> 
+		<a href="#">5</a> 
+		<a href="#">6</a>
+		<a href="#">&raquo;</a>
+	</div>
+	<script type="text/javascript" src="portal.js"></script>
+</body>
+</html>

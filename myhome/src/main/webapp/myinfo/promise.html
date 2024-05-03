@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Promise 객체</title>
+</head>
+<body>
+	<!-- myinfo/promise.html -->
+	<script type="text/javascript">
+		// pending, fullfilled, rejected
+		let promise = new Promise(function(resolve, reject){
+			resolve('Success');
+			reject('Fail');
+			// 둘중 하나만 실행
+		});
+		
+		promise.then(function(result) {
+			console.log('result: ', result);
+			return 'Second!';
+		}) // 이행완료
+		.then(function(data){
+			console.log('data: ', data)
+			return 'Third';	
+		})
+		.then(function(output){
+			console.logs('output: ', output)
+		})
+		.catch(function(err) {
+			console.log('err: ', err)
+		}) //이행거부 
+	</script>
+</body>
+</html>
