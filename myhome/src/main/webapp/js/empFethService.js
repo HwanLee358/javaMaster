@@ -16,7 +16,38 @@ function initForm() {
 		(err) => console.log(err)
 	); // errorCall
 	document.querySelector('#addBtn').addEventListener('click', addRow);
+	
+	document.querySelector('#selectBtn').addEventListener('click', selectdeleteRow);
+	// 전체선택
+	document.querySelector('thead input[type="checkbox"]').addEventListener('change', function(e) {
+		document.querySelectorAll('tbody input[type="checkbox"]').forEach(item => {
+			item.checked = e.target.checked;
+		});
+	});
 }// end of initForm
+
+function selectdeleteRow() {
+	let boxCheck = document.querySelectorAll('tbody input[type="checkbox"]');
+	boxCheck.forEach(item => {
+		if (item.checked) {
+			let eno = item.parentElement.parentElement.dataset.no;
+			let tr = item.parentElement.parentElement;
+			
+			svc.deleteEmp(eno,
+				data => {
+					if (data.retCode == 'OK') {
+						tr.remove();
+					} else if (data.retCode == 'NG') {
+						alert('처리중 에러발생.');
+					} else {
+						alert('처리코드 확인하세요.');
+					}
+				},
+				err => console.log(err)
+			)
+		}
+	})
+}// end of selectdeleteRow
 
 function makeRow(emp = {}) {
 	let props = ['empNO', 'empName', 'email', 'salary'];
