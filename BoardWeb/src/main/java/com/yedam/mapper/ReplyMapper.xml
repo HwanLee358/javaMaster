@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 특별해야 한다=> 고유 -->
+<mapper namespace="com.yedam.mapper.ReplyMapper">
+  <select id="replyList" resultType="com.yedam.vo.ReplyVO">
+  	select *
+  	from tbl_replyes
+  	where board_no = #{boardNo}
+  </select>
+  
+  <delete id="deleteReply" parameterType="int">
+  	delete from tbl_replyes
+  	where reply_no = #{replyNo}
+  </delete>
+  
+  <insert id="insertReply">
+  	insert into tbl_replyes(reply_no, reply, replyer, board_no)
+  	values(replyes_seq.nextval, #{reply}, #{replyer}, #{boardNo})
+  </insert>
+</mapper>
