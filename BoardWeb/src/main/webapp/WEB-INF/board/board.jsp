@@ -68,8 +68,8 @@
 <!-- 댓글목록 -->
 <div class="container reply">
 	<div class="header">
-		<input class="col-sm-8" id="addReply">
-		<button class="col-sm-3" id="addReply">댓글등록</button>
+		<input class="col-sm-8" id="reply">
+		<button class="col-sm-3" id="addReply" onclick="insertRow()">댓글등록</button>
 	</div>
 	<div class="content">
 		<ul>
