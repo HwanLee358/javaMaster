@@ -18,10 +18,13 @@ import com.yedam.web.LoginControl;
 import com.yedam.web.LoginForm;
 import com.yedam.web.LogoutControl;
 import com.yedam.web.MainControl;
+import com.yedam.web.MemberListControl;
+import com.yedam.web.ProductListControl;
 import com.yedam.web.RemoveControl;
 import com.yedam.web.RemoveFormControl;
 import com.yedam.web.RemoveReplyControl;
 import com.yedam.web.ReplyListControl;
+import com.yedam.web.TotalCountControl;
 import com.yedam.web.modfiyBoardControl;
 import com.yedam.web.modfiyFormControl;
 
@@ -57,11 +60,18 @@ public class FrontControl extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/removeReply.do", new RemoveReplyControl());
 		map.put("/addReply.do", new AddReplyControl());
+		map.put("/getTotalCnt.do",new TotalCountControl());
+		
+		// 관리자 권한.
+		map.put("/memberList.do", new MemberListControl());
+		
+		// 상품 관련
+		map.put("/productList.do", new ProductListControl());
 	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
+		//req.setCharacterEncoding("utf-8"); // EncodingFiter 에서 함.
 		
 		String uri = req.getRequestURI();
 		String context = req.getContextPath();

@@ -4,19 +4,42 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 특별해야 한다=> 고유 -->
 <mapper namespace="com.yedam.mapper.ReplyMapper">
-  <select id="replyList" resultType="com.yedam.vo.ReplyVO">
-  	select *
-  	from tbl_replyes
-  	where board_no = #{boardNo}
-  </select>
-  
-  <delete id="deleteReply" parameterType="int">
-  	delete from tbl_replyes
-  	where reply_no = #{replyNo}
-  </delete>
-  
-  <insert id="insertReply">
-  	insert into tbl_replyes(reply_no, reply, replyer, board_no)
-  	values(replyes_seq.nextval, #{reply}, #{replyer}, #{boardNo})
-  </insert>
+	<select id="replyList" resultType="com.yedam.vo.ReplyVO">
+		select *
+		from tbl_replyes
+		where board_no = #{boardNo}
+	</select>
+	
+	<select id="replyListPaging" resultType="com.yedam.vo.ReplyVO" parameterType="com.yedam.common.SearchVO">
+		select r.*
+		from (select rownum rn, a.*
+		      from (select *
+		            from tbl_replyes 
+		            where board_no = #{boardNo}
+		            order by reply_no desc) a
+		            <![CDATA[
+		            where rownum <= (#{rpage} * 5))r
+		            ]]>
+		where r.rn > ( #{rpage} - 1) * 5
+	</select>
+	
+	<select id="selectCount" resultType="int" >
+		select count(1) from tbl_replyes
+		where board_no = #{boardNo}
+	</select>
+	
+	
+	<delete id="deleteReply" parameterType="int">
+		delete from tbl_replyes
+		where reply_no = #{replyNo}
+	</delete>
+
+	<insert id="insertReply" parameterType="com.yedam.vo.ReplyVO">
+		<selectKey resultType="int" keyProperty="replyNo"
+			order="BEFORE">
+			select replyes_seq.nextval from dual
+		</selectKey>
+		insert into tbl_replyes(reply_no, reply, replyer, board_no)
+		values(#{replyNo}, #{reply}, #{replyer}, #{boardNo})
+	</insert>
 </mapper>

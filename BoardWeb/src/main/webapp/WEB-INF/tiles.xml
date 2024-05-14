@@ -3,13 +3,6 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-  <definition name="myapp.homepage" template="/layouts/classic.jsp">
-    <put-attribute name="title" value="Tiles tutorial homepage" />
-    <put-attribute name="header" value="/tiles/banner.jsp" />
-    <put-attribute name="menu" value="/tiles/common_menu.jsp" />
-    <put-attribute name="body" value="/tiles/home_body.jsp" />
-    <put-attribute name="footer" value="/tiles/credits.jsp" />
-  </definition>
   <definition name="myweb.board" template="/WEB-INF/layout/template.jsp">
   	<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
   	<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
@@ -18,9 +11,24 @@
   </definition>
   
   <definition name="WILDCARD:board/*" extends="myweb.board">
-  	<put-attribute name="body" value="/WEB-INF/board/{1}.jsp" />
+  	<put-attribute name="body" value="/WEB-INF/view/board/{1}.jsp" />
   </definition>
   <definition name="WILDCARD:member/*" extends="myweb.board">
-  	<put-attribute name="body" value="/WEB-INF/member/{1}.jsp" />
+  	<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
   </definition>
+
+  
+  <definition name="myweb.admin" template="/WEB-INF/admin/template.jsp">
+  	<put-attribute name="nav" value="/WEB-INF/admin/nav.jsp" />
+  	<put-attribute name="menu" value="/WEB-INF/admin/menu.jsp" />
+  	<put-attribute name="content" value="/WEB-INF/admin/content.jsp" />
+  	<put-attribute name="footer" value="/WEB-INF/admin/footer.jsp" />
+  </definition>
+  <definition name="WILDCARD:admin/*" extends="myweb.admin">
+  	<put-attribute name="content" value="/WEB-INF/view/member/{1}.jsp" />
+  </definition>  
+  
+  <definition name="WILDCARD:*/*" extends="myweb.board">
+  	<put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp" />
+  </definition>  
 </tiles-definitions>

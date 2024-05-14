@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
+import com.yedam.common.HttpUtils;
 import com.yedam.common.PageDTO;
 import com.yedam.common.SearchVO;
 import com.yedam.service.BoardService;
@@ -45,7 +46,8 @@ public class MainControl implements Control{
 		req.setAttribute("searchCondition", sc);
 		req.setAttribute("keyword", kw);
 		
-		req.getRequestDispatcher(path).forward(req, resp);
+//		req.getRequestDispatcher(path).forward(req, resp);
+		HttpUtils.forward(req, resp, path);
 	}
 
 }

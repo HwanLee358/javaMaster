@@ -6,7 +6,7 @@
 	<div class="list-group list-group-flush">
 		<a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
-			href="addForm.do">게시글등록</a> <a
+			href="addForm.do">글등록</a> <a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
 			href="main.do">글목록</a>
 		<c:choose>
@@ -23,7 +23,7 @@
 		</c:choose>
 		<a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
-			href="#!">글목록(dt)</a> <a
+			href="productList.do">상품목록</a> <a
 			class="list-group-item list-group-item-action list-group-item-light p-3"
 			href="#!">Status</a>
 	</div>

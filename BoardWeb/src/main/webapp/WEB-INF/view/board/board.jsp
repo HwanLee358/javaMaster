@@ -17,6 +17,33 @@
 	div.reply span{
 		display: inline-block;
 	}
+	
+	
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
 <h3>상세화면</h3>
 <c:choose>
@@ -68,8 +95,15 @@
 <!-- 댓글목록 -->
 <div class="container reply">
 	<div class="header">
-		<input class="col-sm-8" id="reply">
-		<button class="col-sm-3" id="addReply" onclick="insertRow()">댓글등록</button>
+		<c:choose>
+			<c:when test="${empty logId }">
+				
+			</c:when>
+			<c:otherwise>
+				<input class="col-sm-8" id="reply">
+				<button class="col-sm-3" id="addReply" onclick="insertRow()">댓글등록</button>			
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="content">
 		<ul>
@@ -89,10 +123,21 @@
 			</li>
 		</ul>
 	</div> <!-- div.content -->
+	
+	<div class="footer">
+		<div class="center">
+			<div class="pagination">
+				<a href='#' class="active">1</a>
+				<a href='#'>2</a>
+				<a href='#'>3</a>
+			</div>
+		</div>	
+	</div>
 </div> <!-- div.container.reply -->
 
 <script>
 	const bno = '${result.boardNO }';
 	const writer = '${logId }';
 </script>
+<script src="js/replyService.js"></script>
 <script src="js/board.js"></script>

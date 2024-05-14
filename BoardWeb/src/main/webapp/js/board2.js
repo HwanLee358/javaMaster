@@ -24,23 +24,25 @@ function showList(){
 			li.remove();
 		}
 	})
-	svc.replyList({bno: bno, page: page},
-		result => {
-			result.forEach(reply => {
-				const row = makeRow(reply);
-				document.querySelector('div.reply ul').appendChild(row);
-			});
-			makePageInfo();
-		},
-		err => console.log(err)
-	)
 	
-}//목록 출력의 끝부분.
-//댓글삭제
+	fetch('replyList.do?bno=' + bno + '&page='+page)
+	.then(resolve => resolve.json())
+	.then(result => {
+		result.forEach(reply => {
+			const row = makeRow(reply);
+			document.querySelector('div.reply ul').appendChild(row);
+		});
+		createPageList();
+	})
+	.catch(err => console.log(err));
+	//목록 출력의 끝부분.
+}
+
 function deleteRow(e) {
 	const cnt = e.target.parentElement.parentElement.dataset.rno;
-	svc.removeReply(rno = cnt,
-		result => {
+	fetch('removeReply.do?rno=' + cnt)
+		.then(resolve => resolve.json())
+		.then(result => {
 			if (result.retCode == 'OK') {
 				alert('삭제완료');
 //				e.target.parentElement.parentElement.remove();
@@ -50,9 +52,8 @@ function deleteRow(e) {
 			} else {
 				alert('알수없는 반환값')
 			}
-		},
-		err => console.log(err)
-	)
+		})
+		.catch(err => console.log(err));
 }//end of deleteRow 
 // 댓글 등록
 function insertRow() {
@@ -65,8 +66,9 @@ function insertRow() {
 		alert("로그인 하세요");
 		return;
 	}
-	svc.addReply({bno: bno, writer: writer, reply: reply},
-		result => {
+	fetch('addReply.do?bno=' + bno + '&reply=' + reply + '&replyer=' + writer)
+		.then(resolve => resolve.json())
+		.then(result => {
 			if (result.retCode == 'OK') {
 				//location.reload();
 				makeRow(result.retVal);
@@ -74,9 +76,8 @@ function insertRow() {
 				showList();
 				document.getElementById('reply').value = '';
 			}
-		},
-		err => console.log(err)
-	)
+		})
+		.catch(err => console.log(err));
 }//end of insertRow
 // row 생성
 function makeRow(reply) {
@@ -91,13 +92,9 @@ function makeRow(reply) {
 }	
 // 페이징 생성.
 let pagination = document.querySelector('div.pagination');
-function makePageInfo(){
-	svc.getTotalCount(bno
-	, createPageList
-	, err => console.log(err))
-}
-function createPageList(result){
-	let totalCnt = result.totalCount;
+
+function createPageList(){
+	let totalCnt = 72;
 	let startPage, endPage, realEnd;
 	let prev, next;
 	

@@ -8,7 +8,10 @@ public class BoardTest {
 	public static void main(String[] args) {
 		SqlSession session = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = session.getMapper(ReplyMapper.class);
+		SearchVO search = new SearchVO();
+		search.setRpage(1);
+		search.setBoardNo(3161);
 		
-		mapper.replyList(3161).forEach(reply -> System.out.println(reply));
+		mapper.replyListPaging(search).forEach(reply -> System.out.println(reply));
 	}
 }
