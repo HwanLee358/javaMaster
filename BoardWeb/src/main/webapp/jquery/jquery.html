@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery 연습</title>
+</head>
+<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+<body>
+	<div id="show"></div>
+	<div id="show2"></div>
+	<script>
+		//js vs jquery
+		//<ul><li>apple</li></ul>
+		
+		// javascript.
+		let ul = document.createElement('ul');
+		
+		let li = document.createElement('li');
+		li.innerText = 'apple';
+		ul.appendChild(li);
+		
+		li = document.createElement('li');
+		li.innerText = 'banana';
+		ul.appendChild(li);
+		
+		document.getElementById('show').appendChild(ul);
+		
+		// jquery. $와 _ 특수기호 쓸수 있음.
+		let $ul = $('<ul />').append( $('<li />').text('apple'), $('<li>banana</li>') );
+		console.log($ul);
+		$('#show2').append($ul);
+	</script>
+</body>
+</html>

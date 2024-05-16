@@ -27,6 +27,7 @@ import com.yedam.web.ReplyListControl;
 import com.yedam.web.TotalCountControl;
 import com.yedam.web.modfiyBoardControl;
 import com.yedam.web.modfiyFormControl;
+import com.yedam.web.modifyreplyControl;
 
 public class FrontControl extends HttpServlet {
 	Map<String, Control> map;
@@ -61,6 +62,8 @@ public class FrontControl extends HttpServlet {
 		map.put("/removeReply.do", new RemoveReplyControl());
 		map.put("/addReply.do", new AddReplyControl());
 		map.put("/getTotalCnt.do",new TotalCountControl());
+		map.put("/updatereply.do", new modifyreplyControl());
+		
 		
 		// 관리자 권한.
 		map.put("/memberList.do", new MemberListControl());

@@ -70,8 +70,17 @@ function insertRow() {
 			if (result.retCode == 'OK') {
 				//location.reload();
 				makeRow(result.retVal);
+				// 내림차순
 				page = 1;
-				showList();
+				showList();	
+				/* 오름차순
+				svc.getTotalCount(bno,
+				    result => {
+						page = Math.ceil((result.totalCount)/5);
+						showList();					
+					}, 
+				    err=> console.log(err));
+				*/    
 				document.getElementById('reply').value = '';
 			}
 		},

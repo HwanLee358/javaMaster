@@ -42,4 +42,10 @@
 		insert into tbl_replyes(reply_no, reply, replyer, board_no)
 		values(#{replyNo}, #{reply}, #{replyer}, #{boardNo})
 	</insert>
+	
+	<update id="updateReply" parameterType="com.yedam.vo.ReplyVO">
+		update tbl_replyes
+		set reply = #{reply}
+		where reply_no = #{replyNo}
+	</update>
 </mapper>

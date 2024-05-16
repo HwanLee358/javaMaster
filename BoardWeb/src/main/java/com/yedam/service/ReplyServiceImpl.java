@@ -37,4 +37,11 @@ public class ReplyServiceImpl implements ReplyService{
 		return mapper.selectCount(boardNo);
 	}
 
+	@Override
+	public boolean modifyReply(ReplyVO reply) {
+		// TODO Auto-generated method stub
+		return mapper.updateReply(reply) == 1;
+	}
+
+
 }

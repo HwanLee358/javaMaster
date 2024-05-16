@@ -3,48 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
-	div.reply div {
-		margin: auto;
-	}
-	div.reply ul {
-		list-style-type: none;
-		margin-top: 5px;
-	}
-	div.reply li {
-		padding-top: 1px;
-		padding-bottom: 1px;
-	}
-	div.reply span{
-		display: inline-block;
-	}
-	
-	
-.center {
-  text-align: center;
+div.reply div {
+	margin: auto;
 }
 
-.pagination {
-  display: inline-block;
+div.reply ul {
+	list-style-type: none;
+	margin-top: 5px;
 }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
+div.reply li {
+	padding-top: 1px;
+	padding-bottom: 1px;
 }
 
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
+div.reply span {
+	display: inline-block;
 }
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
 </style>
+<link href="css/paging.css" rel="stylesheet"/>
+<link href="css/modal.css" rel="stylesheet"/>
 <h3>상세화면</h3>
 <c:choose>
 	<c:when test="${empty result}">
@@ -134,10 +112,22 @@
 		</div>	
 	</div>
 </div> <!-- div.container.reply -->
-
+<!-- The Modal -->
+<div id="myModal" class="modal">
+<div class="modal-content">
+    <span class="close">&times;</span>
+    <p>댓글번호: 234</p>
+    <p><input type="text" name="modal_reply"></p>
+    <p><button class="btn btn-primary">수정</button></p>
+ </div>
+</div>
+ 
 <script>
 	const bno = '${result.boardNO }';
 	const writer = '${logId }';
 </script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="js/replyService.js"></script>
-<script src="js/board.js"></script>
+<script src="js/jboard.js"></script>
+<script src="js/jmodal.js"></script>

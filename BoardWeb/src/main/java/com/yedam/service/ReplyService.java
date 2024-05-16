@@ -10,5 +10,5 @@ public interface ReplyService {
 	boolean removeReply(int replyNo); // 삭제.
 	boolean addReply(ReplyVO rvo); //등록
 	int getReplyCnt(int boardNo);
-	
+	boolean modifyReply(ReplyVO reply);
 }

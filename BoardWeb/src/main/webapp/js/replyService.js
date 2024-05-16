@@ -34,5 +34,12 @@ const svc = {
 			.then(resolve => resolve.json())
 			.then(successCall)
 			.catch(errorCall);
+	},
+	//댓글 수정
+	updateReply(param = {}, successCall, errorCall){
+		fetch('updatereply.do?bno=' + param.bno+'&reply='+param.reply)
+		    .then(resolve => resolve.json()) // json -> 객체.
+			.then(successCall)
+			.catch(errorCall);
 	}
 } // end of svc.

@@ -14,6 +14,8 @@ public interface ReplyMapper {
 	
 	// 댓글삭제.
 	int deleteReply(int replyNo);
-	// 댓글수정.
+	// 댓글추가
 	int insertReply(ReplyVO rvo);
+	// 댓글수정
+	int updateReply(ReplyVO reply);
 }
