@@ -15,9 +15,19 @@
   <script>
     const calendar = {
       show() {
-        
+    	  let show = document.querySelector('#show');
+    	  let table = document.createElement('table');
+    	  let thead = document.createElement('thead');
+    	  let tbody = document.createElement('tbody');
+    	  
+    	  table.appendChild(thead);
+    	  table.appendChild(tbody);
+    	  
+    	  table.setAttribute('border', 2);
+    	  show.appendChild(table);
       }
     }
+    calendar.show();
   </script>
 </body>
 

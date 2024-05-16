@@ -8,8 +8,18 @@
 </head>
 <body>
 	<script>
-	    fetch() // new XMLHttpRequest()
-	    
+		const targetAry = new Array();
+	    fetch('data/data.json')
+	    .then(response => response.json())
+	    .then(data => {
+	    	data.forEach(e => {
+	    		if(e.gender == 'Female' && e.salary > 4000){
+	    			targetAry.push(e);
+	    		}
+	    	})
+	    	// new XMLHttpRequest()
+	    })
+	    console.log(targetAry);
 	</script>
 </body>
 </html>
