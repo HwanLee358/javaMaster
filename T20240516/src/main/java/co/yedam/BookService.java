@@ -1,5 +1,7 @@
 package co.yedam;
 
-public interface BookService {
+import java.util.List;
 
+public interface BookService {
+	List<BookVO> bookList();
 }

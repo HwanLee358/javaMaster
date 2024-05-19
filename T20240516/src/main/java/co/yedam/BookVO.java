@@ -1,5 +1,12 @@
 package co.yedam;
 
-public class BookVO {
+import lombok.Data;
 
+@Data
+public class BookVO {
+	private String bookCode;
+	private String bookName;
+	private String bookAuthor;
+	private String bookPress;
+	private int bookPrice;
 }
